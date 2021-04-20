@@ -1,0 +1,64 @@
+<!-- Launch file to start the pole and corner recognition and localization -->
+<launch>
+	<!-- nodelet -->
+	<arg name="use_nodelets"    default="$(optenv USE_NODELETS true)" />
+	<arg name="nodelet_manager" default="$(optenv NODELET_MANAGER core_nodelet_manager)" />
+	<arg name="map"             default=""      doc="Path to the map file" />
+	<arg name="database_name"   default="$(find pole_based_localization)/sqlite/spatia_poles.sqlite"      doc="Path to the fingerprints database" />
+
+    <param name="/pole_recognition/database_name" value="$(arg database_name)" />
+
+	<!-- ========================== use nodes ========================== -->
+    <node pkg="pole_based_localization"
+          name="map_to_utm_transform_broadcaster"
+          type="map_to_utm_transform_broadcaster"
+          output="screen" /> 
+
+    <node unless="$(arg use_nodelets)"
+		pkg="pole_based_localization"
+		name="pole_based_localization_poscorrection"
+		type="pole_based_localization_poscorrection"
+		output="screen"
+	/>
+
+	<node unless="$(arg use_nodelets)"
+		pkg="pole_based_localization"
+		name="pole_based_localization_recognizer"
+		type="pole_based_localization_recognizer"
+		output="screen"
+	/>
+
+	<node unless="$(arg use_nodelets)"
+		pkg="pole_based_localization"
+		name="pole_based_localization"
+		type="pole_based_localization"
+		clear_params="true"
+		output="screen"
+	/>
+
+<!-- ========================== use nodelets ========================== -->
+	<node if="$(arg use_nodelets)"
+		pkg="nodelet"
+		type="nodelet"
+		name="pole_based_localization_recognizer"
+		output="screen"
+		args="load pole_based_localization_recognizer/Nodelet $(arg nodelet_manager)"
+	/>
+
+	<node if="$(arg use_nodelets)"
+		pkg="nodelet"
+		type="nodelet"
+		name="pole_based_localization"
+		clear_params="true"
+		output="screen"
+		args="load pole_based_localization/Nodelet $(arg nodelet_manager)"
+	/> 
+
+	<node if="$(arg use_nodelets)"
+		pkg="nodelet"
+		type="nodelet"
+		name="pole_based_localization_poscorrect"
+		output="screen"
+		args="load pole_based_localization_poscorrect_nodelet/Nodelet $(arg nodelet_manager)"
+	/>
+</launch>

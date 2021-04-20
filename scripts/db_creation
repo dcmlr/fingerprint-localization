@@ -1,0 +1,44 @@
+## Make sure that the 'dist' and 'angle' columns are always stored as DOUBLE in both tables!
+
+SELECT AddGeometryColumn ('fingerprints', 'Geometry', 25833, 'POINT', 2);
+
+UPDATE fingerprints SET Geometry=MakePoint(x, y, 25833);
+
+SELECT CreateSpatialIndex('fingerprints', 'Geometry');
+
+CREATE INDEX dist_angle
+ON "fingerprints"
+(
+dist,angle
+);
+
+CREATE INDEX id_idx
+ON "fingerprints"
+(
+poleid
+);
+
+## Now wall/laneline fingerprints
+SELECT AddGeometryColumn ('fingerprintsWalls', 'Geometry', 25833, 'LINESTRING', 2);
+
+UPDATE fingerprintsWalls SET Geometry=MakeLine(MakePoint(x1, y1, 25833),MakePoint(x2, y2, 25833));
+
+SELECT CreateSpatialIndex('fingerprintsWalls', 'Geometry');
+
+CREATE INDEX idwall_idx
+ON "fingerprintsWalls"
+(
+id
+);
+
+CREATE INDEX dist_angle_walls
+ON "fingerprintsWalls"
+(
+dist,angle
+);
+
+CREATE INDEX oXoY_walls
+ON "fingerprintsWalls"
+(
+oX,oY
+);

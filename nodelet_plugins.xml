@@ -1,0 +1,32 @@
+<library path="lib/libpole_based_localization_nodelet">
+        <class name="pole_based_localization/Nodelet"
+                   type="simple_pole_detector::SimplePoleDetector"
+		   base_class_type="nodelet::Nodelet"
+	>
+		<description>
+                        nodelet for pointcloud feature detection and tracking
+		</description>
+	</class>
+</library>
+
+<library path="lib/libpole_based_localization_recognizer_nodelet">
+        <class name="pole_based_localization_recognizer/Nodelet"
+                   type="pole_recognition::Recognizer"
+		   base_class_type="nodelet::Nodelet"
+	>
+		<description>
+                        nodelet for fingerprint based feature recognition
+		</description>
+	</class>
+</library>
+
+<library path="lib/libpole_based_localization_poscorrect_nodelet">
+        <class name="pole_based_localization_poscorrect_nodelet/Nodelet"
+                   type="pole_recognition::Position_Correction_Publisher"
+		   base_class_type="nodelet::Nodelet"
+	>
+		<description>
+                        nodelet for fusing the corrected self localization back to the robot localization node
+		</description>
+	</class>
+</library>
