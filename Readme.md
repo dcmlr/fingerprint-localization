@@ -1,8 +1,10 @@
 # Source code for the article "Robust LiDAR Feature Localization for Autonomous Vehicles Using Geometric Fingerprinting on Open Datasets"
 ![pole recognition and matching](media/fingerprint_localization.gif)
+This repository contains the source code for the article "Robust LiDAR Feature Localization for Autonomous Vehicles Using Geometric Fingerprinting on Open Datasets" published in the [IEEE Robotics and Automation Letters](https://ieeexplore.ieee.org/document/9363614) and presented at the 2021 International Conference on Robotics and Automation (ICRA 2021).
+A preprint is available for download under this [link](http://www.mi.fu-berlin.de/inf/groups/ag-ki/publications/Robust-Lidar/index.html).
 
 # Results
-Here a comparision of a GNSS localization and the feature localization:<br />
+Here a comparison of a GNSS localization and the feature localization:<br />
 ![pole based localization results](media/thielallee_trajectory_map.png)<br />
 Satellite imagenary: Geoportal Berlin / “Digitale farbige Orthophotos 2019 (DOP20RGB)”, [dl-de/by-2-0](https://www.govdata.de/dl-de/by-2-0), https://www.stadtentwicklung.berlin.de/geoinformation/<br />
 Map data: “Straßenbefahrung 2014”, [dl-de/by-2-0](https://www.govdata.de/dl-de/by-2-0), https://www.stadtentwicklung.berlin.de/geoinformation/
